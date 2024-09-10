@@ -33,19 +33,20 @@ export const getClienteByMatricula = async (req, res) => {
 // Ver si puedo hacer con sobrecarga que no se usen todos los campos
 export const createCliente = async (req, res) => {
     try {
-        const { matricula, vehiculo, nombre, apellido, telefono, email } = req.body;
+        const { matricula, vehiculo, marca, nombre, apellido, telefono, email } = req.body;
         const [rows] = await pool.query(
-            'INSERT INTO clientes (matricula, vehiculo, nombre, apellido, telefono, mail) VALUES (?, ?, ?, ?, ?)',
+            'INSERT INTO clientes (matricula, vehiculo, marca, nombre, apellido, telefono, mail) VALUES (?, ?, ?, ?, ?)',
             [matricula, vehiculo, nombre, apellido, telefono, email]);
 
         res.send({
             id: rows.insertId,
             matricula,
             vehiculo,
+            marca,
             nombre,
             apellido,
             telefono,
-            mail
+            email
         });
 
         console.log(res.send);
